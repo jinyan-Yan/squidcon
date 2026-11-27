@@ -5,3 +5,6 @@ dist/
 test/*.png
 test/*.svg
 examples/*.out.svg
+
+# 本地临时令牌,不要提交
+.token
