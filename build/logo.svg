@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <rect width="64" height="64" rx="14" fill="#598BFD"/>
+
+  <!-- 两侧后掠的鳍 -->
+  <path d="M20 27 L11.5 20 L17.8 34 Z" fill="#FFFFFF"/>
+  <path d="M44 27 L52.5 20 L46.2 34 Z" fill="#FFFFFF"/>
+
+  <!-- 头部圆顶 -->
+  <path d="M32 10.5c-8.3 0-14 6.2-14 14.5v10.5h28V25c0-8.3-5.7-14.5-14-14.5z" fill="#FFFFFF"/>
+
+  <!-- 四条触手 -->
+  <g fill="none" stroke="#FFFFFF" stroke-width="3.4" stroke-linecap="round">
+    <path d="M22 39c0 5.5 1 9.2 2.6 11.6"/>
+    <path d="M28.7 39c0 5.8 0 10.4.9 13.2"/>
+    <path d="M35.3 39c0 5.8 0 10.4-.9 13.2"/>
+    <path d="M42 39c0 5.5-1 9.2-2.6 11.6"/>
+  </g>
+
+  <!-- 眼睛 -->
+  <circle cx="26.6" cy="25.5" r="2.7" fill="#598BFD"/>
+  <circle cx="37.4" cy="25.5" r="2.7" fill="#598BFD"/>
+</svg>

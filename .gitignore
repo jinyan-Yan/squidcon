@@ -1,0 +1,7 @@
+node_modules/
+dist/
+
+# 测试产物(可重新生成)
+test/*.png
+test/*.svg
+examples/*.out.svg

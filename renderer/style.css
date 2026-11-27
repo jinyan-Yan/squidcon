@@ -1,0 +1,813 @@
+/* ------------------------------------------------------------------
+ * IconForge · 白蓝撞色(轻)
+ * 规范 1.5 节 A 组「青蓝薄荷」浅色系
+ * 间距一律 8 的倍数;圆角 卡8 / 钮6 / 标4;单层阴影
+ * ------------------------------------------------------------------ */
+
+:root {
+  --bg-base: #fafafa;
+  /* 不用纯白大面积铺底,掺一点蓝让整屏偏冷 */
+  --bg-surface: #fcfdff;
+  --bg-tint: rgba(53, 179, 201, 0.1); /* 预览区底,极淡的青 */
+  --bg-tint-strong: rgba(53, 179, 201, 0.16);
+
+  --border-subtle: #e5e7eb;
+
+  --text-primary: #1f2937;
+  --text-secondary: #6b7280;
+  --text-disabled: #9ca3af;
+
+  --blue: #598bfd;
+  --blue-hover: #7ba4fe;
+  --blue-soft: rgba(89, 139, 253, 0.1);
+  --mint: #9ad4cb;
+
+  --radius-card: 8px;
+  --radius-btn: 6px;
+
+  --shadow-card: 0 1px 2px rgba(0, 0, 0, 0.06);
+
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+/* 类里的 display 会盖掉 hidden 属性的 UA 样式,这里强制压住 */
+[hidden] {
+  display: none !important;
+}
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  /* 氛围层渐变:规范允许的整屏背景,2 个色停、明度差很小,几乎看不出 */
+  background: linear-gradient(135deg, #fafafa 0%, #f1f6ff 100%);
+  background-attachment: fixed;
+  color: var(--text-primary);
+  font-family: "Segoe UI", "Microsoft YaHei", -apple-system, system-ui, sans-serif;
+  font-size: 15px;
+  line-height: 1.6;
+  overflow: hidden;
+  user-select: none;
+}
+
+h1,
+h2,
+h3,
+p,
+figure {
+  margin: 0;
+}
+
+h1 {
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+h2 {
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+h3 {
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+.caption {
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--text-secondary);
+}
+
+/* ------------------------------------------------------------------
+ * 顶栏
+ * ------------------------------------------------------------------ */
+
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 16px 24px;
+  background: var(--bg-surface);
+  box-shadow: var(--shadow-card);
+  flex-shrink: 0;
+  z-index: 1;
+}
+
+.feature {
+  font-size: 15px;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+.controls {
+  display: flex;
+  align-items: flex-end;
+  gap: 16px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.field > span:first-child {
+  font-size: 13px;
+  color: var(--text-secondary);
+}
+
+input[type="number"] {
+  width: 96px;
+  height: 40px;
+  padding: 0 12px;
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-btn);
+  background: var(--bg-surface);
+  color: var(--text-primary);
+  font-size: 15px;
+  font-variant-numeric: tabular-nums;
+  outline: none;
+  transition: border-color 200ms var(--ease-out);
+}
+
+input[type="number"]:focus {
+  border-color: var(--blue);
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* ------------------------------------------------------------------
+ * 按钮
+ * ------------------------------------------------------------------ */
+
+.btn {
+  height: 40px;
+  padding: 0 20px;
+  border: 1px solid transparent;
+  border-radius: var(--radius-btn);
+  font-size: 15px;
+  font-weight: 500;
+  font-family: inherit;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: transform 250ms var(--spring), background-color 200ms var(--ease-out),
+    border-color 200ms var(--ease-out), color 200ms var(--ease-out);
+}
+
+/* 按压回弹 —— 工具类必做动效 */
+.btn:active:not(:disabled) {
+  transform: scale(0.96);
+  transition: transform 100ms var(--ease-out);
+}
+
+.btn:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+
+.btn-primary {
+  background: var(--blue);
+  color: #ffffff;
+}
+
+.btn-primary:hover:not(:disabled) {
+  background: var(--blue-hover);
+}
+
+.btn-secondary {
+  background: var(--bg-surface);
+  border-color: var(--border-subtle);
+  color: var(--text-primary);
+}
+
+.btn-secondary:hover:not(:disabled) {
+  border-color: var(--text-disabled);
+}
+
+.btn-ghost {
+  background: var(--blue-soft);
+  color: var(--blue);
+  height: 32px;
+  padding: 0 12px;
+  font-size: 13px;
+}
+
+.btn-ghost:hover:not(:disabled) {
+  background: rgba(89, 139, 253, 0.18);
+}
+
+.btn-small {
+  height: 32px;
+  padding: 0 12px;
+  font-size: 13px;
+}
+
+.btn-text {
+  height: 32px;
+  padding: 0 8px;
+  border: none;
+  border-radius: 4px;
+  background: none;
+  color: var(--text-secondary);
+  font-size: 13px;
+  font-family: inherit;
+  cursor: pointer;
+  transition: color 200ms var(--ease-out), transform 250ms var(--spring);
+}
+
+.btn-text:hover {
+  color: var(--text-primary);
+}
+
+.btn-text:active {
+  transform: scale(0.96);
+  transition: transform 100ms var(--ease-out);
+}
+
+/* 卡片底部:格式 / 尺寸 / 导出,每张图各自独立 */
+.card-foot {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px solid var(--border-subtle);
+}
+
+.card-foot .btn {
+  margin-left: auto;
+}
+
+.mini-select {
+  height: 32px;
+  padding: 0 8px;
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-btn);
+  background: var(--bg-surface);
+  color: var(--text-primary);
+  font-size: 13px;
+  font-family: inherit;
+  font-variant-numeric: tabular-nums;
+  outline: none;
+  cursor: pointer;
+  transition: border-color 200ms var(--ease-out);
+}
+
+.mini-select:hover {
+  border-color: var(--text-disabled);
+}
+
+.mini-select:focus {
+  border-color: var(--blue);
+}
+
+/* ------------------------------------------------------------------
+ * 布局
+ * ------------------------------------------------------------------ */
+
+.stage {
+  position: relative;
+  flex: 1;
+  min-height: 0;
+  display: flex;
+}
+
+.layout {
+  display: flex;
+  flex: 1;
+  min-height: 0;
+}
+
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 372px;
+  flex-shrink: 0;
+  /* 顶部留给停靠后的拖入框(24 + 88 + 16) */
+  padding: 128px 0 24px 24px;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.results {
+  flex: 1;
+  min-width: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+/* 垂直压叠:压住下一张的一半高度。
+   --overlap 由 JS 按实际卡片高度算出来写在这里,卡片变高变矮都能跟上 */
+.result-card {
+  margin-bottom: 16px;
+}
+
+.result-card + .result-card {
+  margin-top: calc(-1 * var(--overlap, 48px) - 16px);
+}
+
+/* ------------------------------------------------------------------
+ * 拖拽区
+ * ------------------------------------------------------------------ */
+
+/* ------------------------------------------------------------------
+ * 拖入区:空状态居中,载入后滑到左上角常驻
+ * 位移靠 top/left/width/height 过渡,不用 transform 以免文字变形
+ * ------------------------------------------------------------------ */
+
+.dropzone {
+  position: absolute;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border: 1px dashed #cdd6e4;
+  border-radius: var(--radius-card);
+  background: rgba(255, 255, 255, 0.55);
+  text-align: center;
+  cursor: pointer;
+  overflow: hidden;
+  transition: top 520ms var(--ease-out), left 520ms var(--ease-out),
+    width 520ms var(--ease-out), height 520ms var(--ease-out),
+    background-color 200ms var(--ease-out), border-color 200ms var(--ease-out);
+}
+
+.stage.is-empty .dropzone {
+  top: 50%;
+  left: 50%;
+  width: min(560px, calc(100% - 80px));
+  height: 320px;
+  transform: translate(-50%, -50%);
+}
+
+.stage.is-loaded .dropzone {
+  top: 24px;
+  left: 24px;
+  width: 348px;
+  height: 88px;
+  transform: none;
+}
+
+.dropzone:hover {
+  border-color: var(--blue);
+  background: rgba(89, 139, 253, 0.05);
+}
+
+.dropzone.is-over {
+  border-color: var(--blue);
+  background: var(--blue-soft);
+}
+
+.drop-illustration {
+  /* 宽高写死才能过渡到 0 —— auto 不可插值 */
+  width: 220px;
+  height: 147px;
+  flex-shrink: 0;
+  margin-bottom: 8px;
+  transition: opacity 180ms var(--ease-out), height 520ms var(--ease-out),
+    margin-bottom 520ms var(--ease-out);
+}
+
+/* 停靠时插画要连高度一起收掉,只淡出的话会把文字挤出框外 */
+.stage.is-loaded .drop-illustration {
+  opacity: 0;
+  height: 0;
+  margin-bottom: 0;
+}
+
+.drop-title {
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--text-primary);
+  transition: font-size 520ms var(--ease-out);
+}
+
+.stage.is-loaded .drop-title {
+  font-size: 15px;
+}
+
+.drop-sub {
+  font-size: 13px;
+  color: var(--text-secondary);
+  transition: opacity 180ms var(--ease-out);
+}
+
+.stage.is-loaded .drop-sub {
+  opacity: 0;
+}
+
+.t-docked {
+  display: none;
+}
+
+.stage.is-loaded .t-empty {
+  display: none;
+}
+
+.stage.is-loaded .t-docked {
+  display: inline;
+}
+
+/* 卡片像气泡一样分开落位 */
+#workbench.intro .card {
+  animation: bubble-in 520ms var(--ease-out) both;
+}
+
+@keyframes bubble-in {
+  from {
+    opacity: 0;
+    transform: translateY(18px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* ------------------------------------------------------------------
+ * 卡片通用
+ * ------------------------------------------------------------------ */
+
+.card {
+  position: relative;
+  background: var(--bg-surface);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-card);
+  overflow: hidden;
+  /* 关键:父级是 flex 纵向容器,不写这句卡片一多就会被压扁,底部内容被裁掉 */
+  flex-shrink: 0;
+  transition: transform 220ms var(--ease-out), box-shadow 220ms var(--ease-out),
+    height 300ms var(--ease-out), opacity 300ms var(--ease-out);
+}
+
+/* 悬停浮起 —— 同时抬到其它卡之上,被压住的那截就露出来了 */
+.card:hover {
+  z-index: 50;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 22px rgba(15, 23, 42, 0.13);
+}
+
+/* 点击置顶:层级最高,整张卡完整露出 */
+.card.is-pinned {
+  z-index: 100;
+  box-shadow: 0 12px 30px rgba(15, 23, 42, 0.16);
+}
+
+/* 删除:高度收起 + 淡出,后面的卡片自然补位 */
+.card.is-leaving {
+  height: 0 !important;
+  opacity: 0;
+  box-shadow: none;
+  pointer-events: none;
+}
+
+/* 顶部 6px 色条 —— 两栏靠这一组颜色对撞区分主次 */
+.card-strip {
+  height: 6px;
+}
+
+.strip-blue {
+  background: var(--blue);
+}
+
+.strip-mint {
+  background: var(--mint);
+}
+
+.card-body {
+  padding: 16px;
+}
+
+.card-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.card-title {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.tag {
+  flex-shrink: 0;
+  padding: 0 8px;
+  border-radius: 4px;
+  background: var(--blue-soft);
+  color: var(--blue);
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 20px;
+}
+
+/* ------------------------------------------------------------------
+ * 左:参考台
+ * ------------------------------------------------------------------ */
+
+.ref-card .card-head {
+  align-items: center;
+}
+
+.ref-head-right {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.ref-preview {
+  display: grid;
+  place-items: center;
+  margin-top: 12px;
+  height: 150px;
+  border-radius: var(--radius-btn);
+  background: var(--bg-tint);
+}
+
+.ref-preview img {
+  width: 104px;
+  height: 104px;
+  object-fit: contain;
+}
+
+.size-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 12px;
+}
+
+.size-row .size-cell {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  flex: 1;
+  padding: 8px 0;
+  border-radius: var(--radius-btn);
+  background: var(--bg-tint);
+}
+
+.size-cell img {
+  object-fit: contain;
+}
+
+/* 预览尺寸统一用 class 控制(CSP 禁止内联 style) */
+.size-96 {
+  width: 96px;
+  height: 96px;
+}
+
+.size-72 {
+  width: 72px;
+  height: 72px;
+}
+
+.size-48 {
+  width: 48px;
+  height: 48px;
+}
+
+.size-24 {
+  width: 24px;
+  height: 24px;
+}
+
+.head-text {
+  min-width: 0;
+}
+
+.size-cell span {
+  font-size: 13px;
+  color: var(--text-secondary);
+  font-variant-numeric: tabular-nums;
+}
+
+.meta-line {
+  margin-top: 16px;
+  font-size: 13px;
+  color: var(--text-secondary);
+  font-variant-numeric: tabular-nums;
+}
+
+.stat {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.stat-value {
+  font-size: 28px;
+  font-weight: 700;
+  line-height: 1.25;
+  color: var(--blue);
+  font-variant-numeric: tabular-nums;
+}
+
+.stat-label {
+  font-size: 13px;
+  color: var(--text-secondary);
+}
+
+/* ------------------------------------------------------------------
+ * 右:结果卡片
+ * ------------------------------------------------------------------ */
+
+/* 徽章只有 20px 高、按钮 32px,不显式居中会被 stretch 拉高、文字顶到上沿 */
+.card-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.card-main {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-top: 12px;
+}
+
+.compare {
+  display: grid;
+  grid-template-columns: 140px auto 140px;
+  gap: 12px;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.side {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+}
+
+.side-label {
+  font-size: 13px;
+  color: var(--text-secondary);
+}
+
+.preview-box {
+  display: grid;
+  place-items: center;
+  width: 100%;
+  height: 84px;
+  border-radius: var(--radius-btn);
+  background: var(--bg-tint);
+}
+
+.mini-row {
+  display: flex;
+  align-items: flex-end;
+  gap: 12px;
+  min-height: 56px;
+}
+
+.mini-row .mini {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 2px;
+}
+
+.mini img {
+  object-fit: contain;
+}
+
+.mini span {
+  font-size: 13px;
+  color: var(--text-disabled);
+  font-variant-numeric: tabular-nums;
+}
+
+.arrow {
+  font-size: 20px;
+  color: var(--text-disabled);
+  line-height: 1;
+}
+
+.ratio-panel {
+  margin-left: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 4px;
+  flex-shrink: 0;
+}
+
+.ratio-values {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  font-variant-numeric: tabular-nums;
+}
+
+.ratio-note {
+  font-size: 13px;
+  color: var(--text-secondary);
+}
+
+.ratio-before {
+  font-size: 15px;
+  color: var(--text-secondary);
+}
+
+.ratio-arrow {
+  color: var(--text-disabled);
+}
+
+.ratio-after {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--blue);
+}
+
+/* ------------------------------------------------------------------
+ * 空状态 / 提示
+ * ------------------------------------------------------------------ */
+
+.empty-state {
+  margin: auto;
+  padding: 40px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.empty-title {
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+.hint {
+  padding: 0 4px;
+  font-size: 13px;
+  color: var(--text-secondary);
+}
+
+/* 没有内容时不占位 —— 提示只在操作后短暂出现 */
+.hint:empty {
+  display: none;
+}
+
+.hint.is-error {
+  color: #dc2626;
+}
+
+/* 骨架落位:处理中保持尺寸,不让内容跳一下 */
+.skeleton {
+  border-radius: 4px;
+  background: var(--bg-tint-strong);
+  animation: skeleton-pulse 1.2s ease-in-out infinite;
+}
+
+@keyframes skeleton-pulse {
+  0%,
+  100% {
+    opacity: 0.55;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 200ms !important;
+    transition-duration: 200ms !important;
+  }
+}

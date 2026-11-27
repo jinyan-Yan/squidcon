@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; img-src 'self' blob: data:; style-src 'self'; script-src 'self'"
+    />
+    <title>鱿鱼图标</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <p class="feature">把来源不一的图标,统一成同一套视觉规格</p>
+
+      <div class="controls" id="controls" hidden>
+        <button id="btn-export-all" class="btn btn-primary" disabled>导出全部</button>
+      </div>
+    </header>
+
+    <main class="stage is-empty" id="stage">
+      <div id="dropzone" class="dropzone">
+        <!-- 空状态插画:一只鱿鱼坐在图标块里,两侧漂着待归位的图标 -->
+        <svg class="drop-illustration" viewBox="0 0 180 120" fill="none" aria-hidden="true">
+          <rect
+            x="14"
+            y="40"
+            width="40"
+            height="40"
+            rx="11"
+            fill="#DCE8FF"
+            transform="rotate(-14 34 60)"
+          />
+          <rect
+            x="126"
+            y="40"
+            width="40"
+            height="40"
+            rx="11"
+            fill="#DCE8FF"
+            transform="rotate(14 146 60)"
+          />
+          <rect x="58" y="28" width="64" height="64" rx="15" fill="#598BFD" />
+          <g transform="translate(68.9 39.3) scale(0.66)">
+            <path d="M20 27 L11.5 20 L17.8 34 Z" fill="#FFFFFF" />
+            <path d="M44 27 L52.5 20 L46.2 34 Z" fill="#FFFFFF" />
+            <path
+              d="M32 10.5c-8.3 0-14 6.2-14 14.5v10.5h28V25c0-8.3-5.7-14.5-14-14.5z"
+              fill="#FFFFFF"
+            />
+            <g fill="none" stroke="#FFFFFF" stroke-width="3.4" stroke-linecap="round">
+              <path d="M22 39c0 5.5 1 9.2 2.6 11.6" />
+              <path d="M28.7 39c0 5.8 0 10.4.9 13.2" />
+              <path d="M35.3 39c0 5.8 0 10.4-.9 13.2" />
+              <path d="M42 39c0 5.5-1 9.2-2.6 11.6" />
+            </g>
+            <circle cx="26.6" cy="25.5" r="2.7" fill="#598BFD" />
+            <circle cx="37.4" cy="25.5" r="2.7" fill="#598BFD" />
+          </g>
+        </svg>
+
+        <p class="drop-title">
+          <span class="t-empty">把图标拖进来</span>
+          <span class="t-docked">拖入更多</span>
+        </p>
+        <p class="drop-sub">支持 SVG / PNG / JPG,可以一次拖多张</p>
+      </div>
+
+      <div id="workbench" class="layout" hidden>
+        <aside class="sidebar">
+          <section id="reference-panel" aria-label="参考图"></section>
+        </aside>
+        <section id="results" class="results" aria-label="套用结果"></section>
+      </div>
+    </main>
+
+    <input id="file-input" type="file" accept=".svg,.png,.jpg,.jpeg,.webp,image/*" multiple hidden />
+    <script src="app.js"></script>
+  </body>
+</html>

@@ -1,0 +1,79 @@
+{
+  "name": "icon-forge",
+  "version": "0.3.1",
+  "private": true,
+  "description": "把来源不一的图标,统一成同一套视觉规格",
+  "author": "IconForge",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "icon": "node build/make-icon.js",
+    "dist": "electron-builder --win",
+    "dist:setup": "electron-builder --win nsis",
+    "dist:portable": "electron-builder --win portable"
+  },
+  "devDependencies": {
+    "electron": "^45.5.0",
+    "electron-builder": "^26.18.0"
+  },
+  "dependencies": {
+    "@resvg/resvg-js": "^2.6.2",
+    "sharp": "^0.35.5"
+  },
+  "build": {
+    "appId": "com.iconforge.app",
+    "productName": "鱿鱼图标",
+    "directories": {
+      "output": "dist",
+      "buildResources": "build"
+    },
+    "files": [
+      "main.js",
+      "preload.js",
+      "src/**/*",
+      "renderer/**/*",
+      "package.json",
+      "build/icon.png"
+    ],
+    "asarUnpack": [
+      "**/*.node"
+    ],
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        },
+        {
+          "target": "portable",
+          "arch": [
+            "x64"
+          ]
+        }
+      ],
+      "icon": "build/icon.ico",
+      "executableName": "Squidcon"
+    },
+    "nsis": {
+      "oneClick": false,
+      "perMachine": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "鱿鱼图标",
+      "artifactName": "Squidcon-Setup-${version}.exe",
+      "deleteAppDataOnUninstall": false,
+      "multiLanguageInstaller": true,
+      "installerLanguages": [
+        "zh_CN",
+        "en_US"
+      ]
+    },
+    "portable": {
+      "artifactName": "Squidcon-${version}-portable.exe"
+    }
+  },
+  "productName": "鱿鱼图标"
+}
